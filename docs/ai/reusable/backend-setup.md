@@ -231,6 +231,6 @@ The system checks backends in this order:
 
 ## Next Steps
 
-- See [CONFIGURATION.md](./CONFIGURATION.md) for detailed configuration
-- See [USAGE_EXAMPLES.md](./USAGE_EXAMPLES.md) for usage examples
+- See [Configuration](./configuration.md) for detailed configuration
+- See [Usage Examples](./usage-examples.md) for usage examples
 - Run `python -m reusable.cli configure` for interactive setup

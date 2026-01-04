@@ -189,13 +189,13 @@ sudo ./scripts/setup-nedi-integration.sh --with-nedi-install
 
 ### Detailed Setup
 
-See [NEDI_SETUP_QUICKSTART.md](./NEDI_SETUP_QUICKSTART.md) for:
+See [Quick Start Guide](./quickstart.md) for:
 - Step-by-step instructions
 - Configuration options
 - Testing procedures
 - Troubleshooting
 
-See [NEDI_INSTALLATION_GUIDE.md](./NEDI_INSTALLATION_GUIDE.md) for:
+See [Installation Guide](./installation.md) for:
 - Complete installation documentation
 - All configuration files
 - Advanced setup options
@@ -365,7 +365,7 @@ php -l /var/nedi/html/inc/libmisc.php
 5. Access topology map: http://localhost/Topology-Map.php
 
 ### Integration with Platform
-See [APPLICATION_SETUP.md](./APPLICATION_SETUP.md) for:
+See [Application Setup](../application-setup.md) for:
 - FastAPI backend configuration
 - API endpoints for device data
 - Real-time WebSocket updates

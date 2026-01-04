@@ -81,23 +81,11 @@ sudo ./scripts/setup-nedi-integration.sh
 
 ### Complete Setup Documentation
 
-- **[NEDI_SETUP_QUICKSTART.md](./NEDI_SETUP_QUICKSTART.md)** - Get started in 10-30 minutes
-  - Quick setup options
-  - Manual step-by-step instructions
-  - Configuration examples
-  - Testing and troubleshooting
-
-- **[NEDI_INSTALLATION_GUIDE.md](./NEDI_INSTALLATION_GUIDE.md)** - Detailed reference
-  - Complete system setup
-  - Database configuration
-  - Web server configuration
-  - All configuration options
-
-- **[NEDI_SETUP_COMPLETE.md](./NEDI_SETUP_COMPLETE.md)** - Architecture and overview
-  - System architecture
-  - Enhancements summary
-  - File organization
-  - Technical details
+See the [NeDi Integration Guide](./docs/setup/nedi/README.md) for complete documentation:
+- **[Quick Start](./docs/setup/nedi/quickstart.md)** - Get started in 10-30 minutes
+- **[Installation Guide](./docs/setup/nedi/installation.md)** - Detailed step-by-step reference
+- **[Complete Overview](./docs/setup/nedi/complete.md)** - Architecture and technical details
+- **[Integration Guide](./docs/setup/nedi/integration.md)** - Platform integration
 
 ### What Gets Installed
 
@@ -140,22 +128,26 @@ The platform supports multiple AI backends:
 - **Docker Cagent**: `uv pip install --system docker`
 - **Anthropic**: `uv pip install --system anthropic`
 
-See [reusable/BACKEND_SETUP.md](./reusable/BACKEND_SETUP.md) for detailed setup instructions.
+See [AI Backend Setup](./docs/ai/reusable/backend-setup.md) for detailed setup instructions.
 
 ## Documentation
 
-### NeDi Integration (NEW!)
-- [NEDI_SETUP_QUICKSTART.md](./NEDI_SETUP_QUICKSTART.md) - 10-30 minute quick start
-- [NEDI_INSTALLATION_GUIDE.md](./NEDI_INSTALLATION_GUIDE.md) - Detailed installation reference
-- [NEDI_SETUP_COMPLETE.md](./NEDI_SETUP_COMPLETE.md) - Architecture and technical overview
+Complete documentation is available in the [`docs/`](./docs/) directory:
 
-### Platform Documentation
-- [Device Discovery](./docs/device-discovery.md)
-- [API Reference](./docs/api-reference.md)
-- [Wireless Device Identification](./docs/wireless-identification.md)
-- [AI Assistant](./reusable/README.md) - AI-assisted audit, repair, update, optimize, and learn
-- [Reusable Components](./reusable/QUICKSTART.md) - Quick start guide
-- [Application Setup](./APPLICATION_SETUP.md) - Platform configuration
+### Setup & Installation
+- **[Application Setup](./docs/setup/application-setup.md)** - Platform setup, port allocation, and deployment
+- **[GitHub Setup](./docs/setup/github-setup.md)** - Repository setup and GitHub configuration
+- **[NeDi Integration](./docs/setup/nedi/README.md)** - Complete NeDi installation and integration guide
+
+### AI & Automation
+- **[AI Assistant Overview](./docs/ai/README.md)** - AI Assistant features and architecture
+- **[AI Integration Guide](./docs/ai/integration.md)** - How AI Assistant integrates with the platform
+- **[Reusable Components](./docs/ai/reusable/README.md)** - Reusable AI components package
+
+### Quick Links
+- **[Documentation Index](./docs/README.md)** - Complete documentation index
+- **[NeDi Quick Start](./docs/setup/nedi/quickstart.md)** - Get NeDi running in 10 minutes
+- **[AI Assistant Quick Start](./docs/ai/reusable/quickstart-ai-assistant.md)** - Get AI Assistant running in 30 seconds
 
 ## Contributing
 

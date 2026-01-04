@@ -497,7 +497,7 @@ sudo -u www-data cat /var/nedi/icon_library/fortigate/FG-1000.svg >/dev/null && 
 2. **Configure Credentials**: Add SNMP/API credentials in the web interface
 3. **Add Devices**: Register network devices for monitoring
 4. **Set Up Alerts**: Configure alerts for device status changes
-5. **Integrate with Network Observability Platform**: See [../APPLICATION_SETUP.md](../APPLICATION_SETUP.md)
+5. **Integrate with Network Observability Platform**: See [Application Setup](../application-setup.md)
 
 ## Support
 

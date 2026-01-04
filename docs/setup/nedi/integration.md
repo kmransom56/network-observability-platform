@@ -2,11 +2,6 @@
 
 This guide explains how to integrate the AI Assistant with your existing NeDi web interface at `nedi.netintegrate.net`.
 
-## Current Setup
-
-Your NeDi installation is accessible at:
-- **URL**: `https://nedi.netintegrate.net/Devices-Status.php?dev=fortigate`
-- **Status**: Shows "Chat Copilot" interface trying to connect to backend
 
 ## Integration Options
 

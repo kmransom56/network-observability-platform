@@ -301,7 +301,7 @@ php -r "mysqli_connect('localhost', 'nedi', 'dbpa55', 'nedi') or die('DB Error')
    - Run discovery again
 
 2. **Integrate with Network Observability Platform**
-   - See [APPLICATION_SETUP.md](./APPLICATION_SETUP.md)
+   - See [Application Setup](../application-setup.md)
    - Configure FastAPI backend
    - Set up API endpoints
 

@@ -59,4 +59,4 @@ python -m reusable.cli configure openai
 
 ## That's It!
 
-See [CONFIGURATION.md](./CONFIGURATION.md) for more details.
+See [Configuration](./configuration.md) for more details.
