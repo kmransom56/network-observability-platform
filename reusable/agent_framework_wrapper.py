@@ -19,7 +19,7 @@ Usage:
 
 import os
 import sys
-from typing import Optional, Dict, Any, List
+from typing import Optional, Dict, Any, List, TYPE_CHECKING
 from enum import Enum
 import logging
 
@@ -40,7 +40,11 @@ try:
     from .secure_key_manager import SecureKeyManager
 except ImportError:
     # Fallback for standalone usage
-    from secure_key_manager import SecureKeyManager
+    try:
+        from secure_key_manager import SecureKeyManager
+    except ImportError:
+        # For type hints only
+        SecureKeyManager = None
 
 logger = logging.getLogger(__name__)
 
@@ -63,7 +67,7 @@ class AgentFrameworkWrapper:
     """
     
     def __init__(self, backend: AgentBackend = AgentBackend.OPENAI,
-                 api_key_manager: Optional[SecureKeyManager] = None,
+                 api_key_manager: Optional['SecureKeyManager'] = None,
                  config: Optional[Dict[str, Any]] = None):
         """
         Initialize the agent framework wrapper.

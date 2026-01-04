@@ -1,0 +1,22 @@
+# Core Dependencies
+cryptography>=3.0.0
+
+# AI Agent Backends
+## OpenAI (for vLLM and OpenAI API)
+openai>=1.0.0
+
+## Microsoft AutoGen
+pyautogen>=0.2.0
+
+## Magentic One
+magentic>=1.0.0
+
+## Docker Cagent
+docker>=6.0.0
+
+## Anthropic (Claude)
+anthropic>=0.18.0
+
+# Optional: For enhanced functionality
+requests>=2.31.0
+python-dotenv>=1.0.0

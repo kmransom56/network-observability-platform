@@ -36,10 +36,13 @@ This platform provides real-time network monitoring, device discovery, topology 
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/network-observability-platform.git
+git clone https://github.com/kmransom56/network-observability-platform.git
 cd network-observability-platform
 
-# Set up Python environment
+# Set up Python environment (using uv - recommended)
+uv pip install --system -r requirements.txt
+
+# Or using virtual environment
 uv venv
 source .venv/bin/activate
 uv pip install -r requirements.txt
@@ -53,7 +56,22 @@ cp .env.example .env
 
 # Initialize database
 python scripts/init_db.py
+
+# Configure AI backends (optional)
+python -m reusable.cli configure
 ```
+
+### AI Backend Setup
+
+The platform supports multiple AI backends:
+
+- **OpenAI** (including vLLM): `uv pip install --system openai`
+- **Microsoft AutoGen**: `uv pip install --system pyautogen`
+- **Magentic One**: `uv pip install --system magentic`
+- **Docker Cagent**: `uv pip install --system docker`
+- **Anthropic**: `uv pip install --system anthropic`
+
+See [reusable/BACKEND_SETUP.md](./reusable/BACKEND_SETUP.md) for detailed setup instructions.
 
 ## Documentation
 
