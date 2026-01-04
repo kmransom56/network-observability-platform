@@ -6,12 +6,14 @@ that can be easily integrated into other applications.
 
 Modules:
     - secure_key_manager: Secure API key storage and retrieval
-    - agent_framework: Multi-backend AI agent framework
+    - agent_framework_wrapper: Multi-backend AI agent framework
+    - ai_assistant: AI-assisted audit, repair, update, optimize, and learn functions
 """
 
 from .secure_key_manager import SecureKeyManager
 from .agent_framework_wrapper import AgentFrameworkWrapper, AgentBackend
+from .ai_assistant import AIAssistant
 
-__all__ = ['SecureKeyManager', 'AgentFrameworkWrapper', 'AgentBackend']
+__all__ = ['SecureKeyManager', 'AgentFrameworkWrapper', 'AgentBackend', 'AIAssistant']
 
-__version__ = '1.0.0'
+__version__ = '1.1.0'
