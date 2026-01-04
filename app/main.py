@@ -26,7 +26,12 @@ app = FastAPI(
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Configure appropriately for production
+    allow_origins=[
+        "https://nedi.netintegrate.net",
+        "http://localhost:11047",
+        "http://localhost:8000",
+        "*"  # For development - restrict in production
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
