@@ -30,11 +30,17 @@ if _parent_dir not in sys.path:
 
 try:
     from agents.agent_framework import AgentFramework, AgentBackend as OriginalAgentBackend
-    from reusable.secure_key_manager import SecureKeyManager
 except ImportError:
     # Fallback if agents module not available
     AgentFramework = None
     OriginalAgentBackend = None
+
+# Import SecureKeyManager (always available in this package)
+try:
+    from .secure_key_manager import SecureKeyManager
+except ImportError:
+    # Fallback for standalone usage
+    from secure_key_manager import SecureKeyManager
 
 logger = logging.getLogger(__name__)
 
