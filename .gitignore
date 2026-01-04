@@ -97,3 +97,8 @@ credentials.json
 nedi.conf
 data/
 *.conf.local
+
+# AI Assistant
+.network_observability_ai_config.json
+.network_observability_knowledge_base.json
+*.keys.db
