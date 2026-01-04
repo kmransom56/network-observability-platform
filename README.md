@@ -14,6 +14,7 @@ This platform provides real-time network monitoring, device discovery, topology 
 - **Topology Visualization**: Network topology mapping and visualization
 - **API Integration**: RESTful APIs for network device management
 - **Database Storage**: Persistent storage of network inventory and historical data
+- **AI-Assisted Operations**: Audit, repair, update, optimize, and learn capabilities using AI agents
 
 ## Architecture
 
@@ -59,6 +60,8 @@ python scripts/init_db.py
 - [Device Discovery](./docs/device-discovery.md)
 - [API Reference](./docs/api-reference.md)
 - [Wireless Device Identification](./docs/wireless-identification.md)
+- [AI Assistant](./reusable/README.md) - AI-assisted audit, repair, update, optimize, and learn
+- [Reusable Components](./reusable/QUICKSTART.md) - Quick start guide
 
 ## Contributing
 
