@@ -31,6 +31,7 @@ This platform provides real-time network monitoring, device discovery, topology 
 - Node.js 18+
 - MySQL/MariaDB
 - Network device access (SNMP, SSH, REST API)
+- **NeDi Installation** - See [NeDi Setup Guide](#nedi-setup) below
 
 ### Installation
 
@@ -61,6 +62,74 @@ python scripts/init_db.py
 python -m reusable.cli configure
 ```
 
+## NeDi Setup
+
+### Quick Start (10 minutes)
+
+The Network Observability Platform requires NeDi for network topology discovery. Setup is automated:
+
+```bash
+# 1. Run the NeDi integration setup
+sudo ./scripts/setup-nedi-integration.sh
+
+# 2. Access NeDi at: http://localhost/Topology-Map.php
+
+# 3. Configure SNMP on your network devices
+
+# 4. Run discovery: sudo /var/nedi/nedi.pl
+```
+
+### Complete Setup Documentation
+
+- **[NEDI_SETUP_QUICKSTART.md](./NEDI_SETUP_QUICKSTART.md)** - Get started in 10-30 minutes
+  - Quick setup options
+  - Manual step-by-step instructions
+  - Configuration examples
+  - Testing and troubleshooting
+
+- **[NEDI_INSTALLATION_GUIDE.md](./NEDI_INSTALLATION_GUIDE.md)** - Detailed reference
+  - Complete system setup
+  - Database configuration
+  - Web server configuration
+  - All configuration options
+
+- **[NEDI_SETUP_COMPLETE.md](./NEDI_SETUP_COMPLETE.md)** - Architecture and overview
+  - System architecture
+  - Enhancements summary
+  - File organization
+  - Technical details
+
+### What Gets Installed
+
+✅ **NeDi Network Discovery Engine** - SNMP-based topology discovery  
+✅ **240+ Vendor-Specific Icons** - FortiGate, FortiAP, FortiSwitch, and more  
+✅ **Client Device Icons** - Mobile, laptop, desktop detection  
+✅ **Enhanced Web Interface** - PHP with D3.js visualization  
+✅ **MySQL Database** - Device inventory and history  
+✅ **Device Metrics** - CPU, temperature, memory, OS tracking  
+
+### Integration Features
+
+- Vendor-specific device icons (136 FortiGate, 35 FortiAP, 69 FortiSwitch models)
+- Automatic client device identification from MAC addresses
+- D3.js topology visualization with interactive tooltips
+- Real-time device metrics display
+- API integration with the platform
+
+### Setup Scripts
+
+**Main Integration Script** (`scripts/setup-nedi-integration.sh`)
+- Automates icon library installation
+- Applies PHP enhancements
+- Verifies all components
+- Supports `--dry-run` mode for preview
+
+**Enhancement Script** (`/home/keith/NeDi/apply-enhancements.py`)
+- Adds vendor device detection
+- Adds client device identification
+- Enhances web interface
+- Automatic backups and syntax verification
+
 ### AI Backend Setup
 
 The platform supports multiple AI backends:
@@ -75,11 +144,18 @@ See [reusable/BACKEND_SETUP.md](./reusable/BACKEND_SETUP.md) for detailed setup 
 
 ## Documentation
 
+### NeDi Integration (NEW!)
+- [NEDI_SETUP_QUICKSTART.md](./NEDI_SETUP_QUICKSTART.md) - 10-30 minute quick start
+- [NEDI_INSTALLATION_GUIDE.md](./NEDI_INSTALLATION_GUIDE.md) - Detailed installation reference
+- [NEDI_SETUP_COMPLETE.md](./NEDI_SETUP_COMPLETE.md) - Architecture and technical overview
+
+### Platform Documentation
 - [Device Discovery](./docs/device-discovery.md)
 - [API Reference](./docs/api-reference.md)
 - [Wireless Device Identification](./docs/wireless-identification.md)
 - [AI Assistant](./reusable/README.md) - AI-assisted audit, repair, update, optimize, and learn
 - [Reusable Components](./reusable/QUICKSTART.md) - Quick start guide
+- [Application Setup](./APPLICATION_SETUP.md) - Platform configuration
 
 ## Contributing
 
