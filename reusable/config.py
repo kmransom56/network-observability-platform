@@ -8,7 +8,18 @@ import os
 import json
 from pathlib import Path
 from typing import Optional, Dict, Any
-from .agent_framework_wrapper import AgentBackend
+
+try:
+    from .agent_framework_wrapper import AgentBackend
+except ImportError:
+    # Fallback for standalone usage
+    from enum import Enum
+    class AgentBackend(Enum):
+        OPENAI = "openai"
+        ANTHROPIC = "anthropic"
+        AUTOGEN = "autogen"
+        MAGENTIC_ONE = "magentic_one"
+        DOCKER_CAGENT = "docker_cagent"
 
 
 class AIConfig:

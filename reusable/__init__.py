@@ -13,7 +13,30 @@ Modules:
 from .secure_key_manager import SecureKeyManager
 from .agent_framework_wrapper import AgentFrameworkWrapper, AgentBackend
 from .ai_assistant import AIAssistant
+from .config import AIConfig
+from .simple_ai import (
+    get_ai_assistant,
+    audit_file,
+    repair_code,
+    optimize_code,
+    learn_from_codebase,
+    update_dependencies,
+    configure_backend
+)
 
-__all__ = ['SecureKeyManager', 'AgentFrameworkWrapper', 'AgentBackend', 'AIAssistant']
+__all__ = [
+    'SecureKeyManager',
+    'AgentFrameworkWrapper',
+    'AgentBackend',
+    'AIAssistant',
+    'AIConfig',
+    'get_ai_assistant',
+    'audit_file',
+    'repair_code',
+    'optimize_code',
+    'learn_from_codebase',
+    'update_dependencies',
+    'configure_backend',
+]
 
-__version__ = '1.1.0'
+__version__ = '1.2.0'
