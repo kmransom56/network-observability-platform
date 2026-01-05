@@ -154,7 +154,7 @@ echo "✓ PHP enhancements applied successfully"
 
 ### Option B: Manual Application
 
-If you prefer to manually apply the enhancements, see [MANUAL_PHP_ENHANCEMENTS.md](./MANUAL_PHP_ENHANCEMENTS.md)
+If you prefer to manually apply the enhancements, you can review the changes made by the automated script in `/home/keith/NeDi/apply-enhancements.py` and apply them manually to the PHP files.
 
 ## Step 6: Configure NeDi Database
 
