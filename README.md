@@ -12,7 +12,8 @@ This platform provides real-time network monitoring, device discovery, topology 
 - **Real-Time Discovery**: Automated device and client discovery via SNMP, REST APIs, and SSH
 - **Device Identification**: MAC address OUI lookup, device type classification, and wireless client tracking
 - **Topology Visualization**: Network topology mapping and visualization
-- **API Integration**: RESTful APIs for network device management
+- **API Integration**: RESTful APIs for network device management with 1,676+ verified endpoints
+- **API Validation**: MCP-based validation of 814 Fortinet and 862 Meraki API endpoints
 - **Database Storage**: Persistent storage of network inventory and historical data
 - **AI-Assisted Operations**: Audit, repair, update, optimize, and learn capabilities using AI agents
 
@@ -129,6 +130,110 @@ The platform supports multiple AI backends:
 - **Anthropic**: `uv pip install --system anthropic`
 
 See [AI Backend Setup](./docs/ai/reusable/backend-setup.md) for detailed setup instructions.
+
+## MCP Server Integration
+
+The platform includes integrated MCP (Model Context Protocol) server support for API validation and code generation:
+
+### API Endpoint Documentation
+
+The platform has offline access to 1,676+ network device API endpoints:
+
+**Meraki API:** 862 endpoints
+- GET operations: 468
+- POST operations: 157
+- PUT operations: 174
+- DELETE operations: 63
+
+**Fortinet (FNDN) API:** 814 endpoints
+- FortiGate operations: 465
+- FortiManager operations: 92
+- FortiAnalyzer operations: 257
+
+### Features
+
+✅ **Device Operation Validation** - Validate operations before execution
+✅ **Multi-Vendor Support** - FortiGate, FortiManager, FortiAnalyzer, Meraki
+✅ **API Search** - Find endpoints by keyword across all vendors
+✅ **Code Generation** - Auto-generate device API client code
+✅ **AI Integration** - Claude, Cline, Cursor have access to real endpoints
+✅ **Offline Documentation** - All endpoints available without internet
+
+### Quick Start
+
+```bash
+# Test MCP integration
+python3 api_validator.py
+
+# Or check MCP status via API
+curl http://localhost:8000/mcp/status
+
+# Use in device management code
+from api_validator import NetworkDeviceValidator
+validator = NetworkDeviceValidator()
+is_valid = validator.validate_device_operation("fortigate", "firewall")
+```
+
+### Documentation
+
+- **[MCP Quick Start](./NETWORK_OBSERVABILITY_MCP_QUICK_START.md)** - 5-minute integration guide
+- **[MCP Setup Guide](./MCP_INTEGRATION_SETUP.md)** - Comprehensive setup and configuration
+- **[MCP Status](./MCP_INTEGRATION_COMPLETE.md)** - Integration verification and next steps
+
+## Vendor-Specific Icon Mapping
+
+The platform includes comprehensive vendor-specific icon mapping for network topology visualization.
+
+### Features
+
+✅ **Device Type Identification** - Automatically identifies FortiGate, FortiSwitch, FortiAP, Meraki, Cisco devices
+✅ **Vendor-Specific Icons** - 336+ Fortinet icons (136 FortiGate models, 69 FortiSwitch, 35 FortiAP models)
+✅ **Endpoint Detection** - Desktop, laptop, and mobile device identification
+✅ **Vendor Color Coding** - Visual distinction by vendor (#E5A100 Fortinet, #00BCD4 Meraki, #0066CC Cisco)
+✅ **Model-Specific Icons** - Detailed device representation (FG-3100D.svg, FSW-248D.svg, etc.)
+✅ **Infrastructure vs Endpoints** - Clear visual hierarchy for device types
+
+### Components
+
+**Python Mapper** (`icon_vendor_mapper.py`):
+```python
+from icon_vendor_mapper import VendorIconMapper
+
+mapper = VendorIconMapper()
+icon_info = mapper.get_device_icon(sysname="FortiGate-3100D", model="FG-3100D")
+# Returns: icon path, vendor, color, category, device type
+```
+
+**PHP NeDi Integration** (`nedi_topology_mapper.php`):
+```php
+require_once('nedi_topology_mapper.php');
+$mapper = new NeDiTopologyMapper();
+$html = $mapper->get_device_icon_html('FortiGate-3100D', 'FG-3100D', 32);
+```
+
+**NeDi Integration Module** (`nedi_topology_integration.py`):
+```python
+from nedi_topology_integration import NeDiTopologyIntegrator
+
+integrator = NeDiTopologyIntegrator()
+devices = integrator.get_topology_devices()
+enhanced = integrator.enhance_devices_with_icons(devices)
+integrator.export_topology_for_d3('/tmp/topology_d3.json')
+```
+
+### Your Network Devices
+
+The following devices in your network are mapped to vendor-specific icons:
+
+- **FortiGate-3100D** (192.168.0.254) → Fortinet Orange, firewall icon
+- **FortiSwitch-248D** (10.255.1.2) → Fortinet Orange, switch icon
+- **FortiAP-222B, FortiAP-231F** → Fortinet Orange, access_point icons
+
+### Documentation
+
+- **[Full Icon Mapping Guide](./ICON_MAPPING_GUIDE.md)** - Complete documentation and API reference
+- **[Implementation Quick Reference](./VENDOR_ICON_IMPLEMENTATION.md)** - Step-by-step integration guide
+- **[Icon Library](file:///var/nedi/icon_library/)** - 2,114+ SVG/PNG icons available
 
 ## Documentation
 

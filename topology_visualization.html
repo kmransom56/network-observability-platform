@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Network Topology - Vendor Icons</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .content {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: white;
+            border-right: 1px solid #e0e0e0;
+            overflow-y: auto;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+        }
+
+        .sidebar h3 {
+            font-size: 14px;
+            text-transform: uppercase;
+            color: #667eea;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .sidebar h3:first-child {
+            margin-top: 0;
+        }
+
+        .stats-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 13px;
+        }
+
+        .stats-label {
+            color: #666;
+            font-weight: 500;
+        }
+
+        .stats-value {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .vendor-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin: 5px 0;
+            background: #f9f9f9;
+            border-radius: 6px;
+            border-left: 4px solid #ddd;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .vendor-item:hover {
+            background: #f0f0f0;
+            transform: translateX(5px);
+        }
+
+        .vendor-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 3px;
+            margin-right: 10px;
+        }
+
+        .vendor-fortinet {
+            border-left-color: #E5A100;
+        }
+
+        .vendor-meraki {
+            border-left-color: #00BCD4;
+        }
+
+        .vendor-cisco {
+            border-left-color: #0066CC;
+        }
+
+        .vendor-generic {
+            border-left-color: #7F8C8D;
+        }
+
+        .vendor-endpoint {
+            border-left-color: #16A085;
+        }
+
+        .visualization {
+            flex: 1;
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .node {
+            cursor: pointer;
+            stroke: white;
+            stroke-width: 2px;
+        }
+
+        .node:hover {
+            stroke: #333;
+            stroke-width: 3px;
+        }
+
+        .node-icon {
+            cursor: pointer;
+        }
+
+        .node-label {
+            font-size: 11px;
+            pointer-events: none;
+            text-anchor: middle;
+            dominant-baseline: middle;
+            fill: #333;
+            font-weight: 500;
+        }
+
+        .link {
+            stroke: #999;
+            stroke-opacity: 0.6;
+            stroke-width: 2px;
+        }
+
+        .link:hover {
+            stroke-opacity: 1;
+            stroke-width: 3px;
+        }
+
+        .tooltip {
+            position: absolute;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            border-radius: 6px;
+            font-size: 12px;
+            pointer-events: none;
+            z-index: 1000;
+            display: none;
+            max-width: 250px;
+            word-wrap: break-word;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .tooltip.show {
+            display: block;
+        }
+
+        .tooltip-title {
+            font-weight: 600;
+            margin-bottom: 6px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            padding-bottom: 6px;
+        }
+
+        .tooltip-item {
+            margin: 4px 0;
+        }
+
+        .tooltip-label {
+            color: #aaa;
+            display: inline-block;
+            width: 80px;
+        }
+
+        .icon-legend {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            font-size: 16px;
+            color: #666;
+        }
+
+        .error {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            font-size: 14px;
+            color: #d32f2f;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌐 Network Topology Visualization</h1>
+            <p>Real-time network infrastructure map with vendor-specific icons</p>
+        </div>
+
+        <div class="content">
+            <div class="sidebar">
+                <h3>📊 Statistics</h3>
+                <div id="stats"></div>
+
+                <h3>🏢 Vendors</h3>
+                <div id="vendors"></div>
+
+                <h3>📁 Legend</h3>
+                <div class="icon-legend" id="legend"></div>
+            </div>
+
+            <div class="visualization">
+                <div id="chart"></div>
+                <div class="tooltip" id="tooltip"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = "http://localhost:8000/api/topology";
+        const tooltip = document.getElementById("tooltip");
+        const chart = document.getElementById("chart");
+
+        // Vendor colors and info
+        const vendorColors = {
+            "Fortinet": "#E5A100",
+            "Meraki": "#00BCD4",
+            "Cisco": "#0066CC",
+            "Generic": "#7F8C8D"
+        };
+
+        // Load topology data
+        async function loadTopology() {
+            try {
+                chart.innerHTML = '<div class="loading">Loading network topology...</div>';
+
+                // Fetch device topology with icons
+                const response = await fetch(`${API_URL}/d3`);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+                const data = await response.json();
+
+                if (data.status !== "success") {
+                    throw new Error(data.message || "Failed to load topology");
+                }
+
+                // Load summary stats
+                const summaryResponse = await fetch(`${API_URL}/summary`);
+                const summaryData = await summaryResponse.json();
+                if (summaryData.status === "success") {
+                    displayStats(summaryData.summary);
+                }
+
+                // Display topology
+                displayTopology(data);
+
+            } catch (error) {
+                console.error("Error loading topology:", error);
+                chart.innerHTML = `<div class="error">⚠️ Error loading topology:<br>${error.message}</div>`;
+            }
+        }
+
+        // Display statistics
+        function displayStats(summary) {
+            const statsDiv = document.getElementById("stats");
+            let html = `
+                <div class="stats-item">
+                    <span class="stats-label">Total Devices</span>
+                    <span class="stats-value">${summary.total_devices}</span>
+                </div>
+            `;
+
+            if (summary.by_device_class) {
+                const infra = summary.by_device_class.infrastructure || 0;
+                const endpoints = summary.by_device_class.endpoint || 0;
+                html += `
+                    <div class="stats-item">
+                        <span class="stats-label">Infrastructure</span>
+                        <span class="stats-value">${infra}</span>
+                    </div>
+                    <div class="stats-item">
+                        <span class="stats-label">Endpoints</span>
+                        <span class="stats-value">${endpoints}</span>
+                    </div>
+                `;
+            }
+
+            statsDiv.innerHTML = html;
+        }
+
+        // Display vendors
+        function displayVendors(devices) {
+            const vendorsDiv = document.getElementById("vendors");
+            const vendors = {};
+
+            devices.forEach(d => {
+                const vendor = d.vendor || "Unknown";
+                vendors[vendor] = (vendors[vendor] || 0) + 1;
+            });
+
+            let html = "";
+            Object.entries(vendors)
+                .sort((a, b) => b[1] - a[1])
+                .forEach(([vendor, count]) => {
+                    const color = vendorColors[vendor] || "#999";
+                    html += `
+                        <div class="vendor-item vendor-${vendor.toLowerCase().replace(/\s+/g, '-')}">
+                            <div class="vendor-color" style="background: ${color}"></div>
+                            <span>${vendor} <strong>(${count})</strong></span>
+                        </div>
+                    `;
+                });
+
+            vendorsDiv.innerHTML = html;
+        }
+
+        // Display topology visualization
+        function displayTopology(data) {
+            const nodes = data.nodes || [];
+            const links = data.links || [];
+
+            chart.innerHTML = "";
+
+            if (nodes.length === 0) {
+                chart.innerHTML = '<div class="loading">No devices found in topology</div>';
+                return;
+            }
+
+            // Display vendors
+            displayVendors(nodes);
+
+            // D3 setup
+            const width = chart.clientWidth;
+            const height = chart.clientHeight;
+
+            const svg = d3.select("#chart")
+                .append("svg")
+                .attr("width", width)
+                .attr("height", height);
+
+            // Create simulation
+            const simulation = d3.forceSimulation(nodes)
+                .force("link", d3.forceLink(links)
+                    .id(d => d.id)
+                    .distance(100)
+                    .strength(0.5))
+                .force("charge", d3.forceManyBody().strength(-300))
+                .force("center", d3.forceCenter(width / 2, height / 2))
+                .force("collision", d3.forceCollide().radius(50));
+
+            // Add links
+            const linkElements = svg.selectAll(".link")
+                .data(links)
+                .enter()
+                .append("line")
+                .attr("class", "link")
+                .attr("stroke", "#999")
+                .attr("stroke-opacity", 0.6)
+                .attr("stroke-width", 2);
+
+            // Add nodes
+            const nodeElements = svg.selectAll(".node")
+                .data(nodes)
+                .enter()
+                .append("g")
+                .attr("class", "node")
+                .call(d3.drag()
+                    .on("start", dragStarted)
+                    .on("drag", dragged)
+                    .on("end", dragEnded));
+
+            // Add circles
+            nodeElements.append("circle")
+                .attr("r", 20)
+                .attr("fill", d => d.color || "#999")
+                .attr("stroke", "white")
+                .attr("stroke-width", 2);
+
+            // Add labels
+            nodeElements.append("text")
+                .attr("class", "node-label")
+                .attr("dy", "0em")
+                .text(d => d.label)
+                .attr("font-size", "11px");
+
+            // Add tooltips
+            nodeElements.on("mouseover", (event, d) => {
+                const content = `
+                    <div class="tooltip-title">${d.label}</div>
+                    <div class="tooltip-item">
+                        <span class="tooltip-label">Vendor:</span> ${d.vendor}
+                    </div>
+                    <div class="tooltip-item">
+                        <span class="tooltip-label">Type:</span> ${d.device_type}
+                    </div>
+                    <div class="tooltip-item">
+                        <span class="tooltip-label">Category:</span> ${d.category}
+                    </div>
+                `;
+                tooltip.innerHTML = content;
+                tooltip.classList.add("show");
+            })
+            .on("mousemove", (event) => {
+                tooltip.style.left = (event.pageX + 10) + "px";
+                tooltip.style.top = (event.pageY + 10) + "px";
+            })
+            .on("mouseout", () => {
+                tooltip.classList.remove("show");
+            });
+
+            // Update positions
+            simulation.on("tick", () => {
+                linkElements
+                    .attr("x1", d => d.source.x)
+                    .attr("y1", d => d.source.y)
+                    .attr("x2", d => d.target.x)
+                    .attr("y2", d => d.target.y);
+
+                nodeElements
+                    .attr("transform", d => `translate(${d.x},${d.y})`);
+            });
+
+            // Drag functions
+            function dragStarted(event, d) {
+                if (!event.active) simulation.alphaTarget(0.3).restart();
+                d.fx = d.x;
+                d.fy = d.y;
+            }
+
+            function dragged(event, d) {
+                d.fx = event.x;
+                d.fy = event.y;
+            }
+
+            function dragEnded(event, d) {
+                if (!event.active) simulation.alphaTarget(0);
+                d.fx = null;
+                d.fy = null;
+            }
+        }
+
+        // Initialize
+        window.addEventListener("load", loadTopology);
+        window.addEventListener("resize", () => {
+            // Reload on resize for responsive layout
+            setTimeout(loadTopology, 500);
+        });
+    </script>
+</body>
+</html>
